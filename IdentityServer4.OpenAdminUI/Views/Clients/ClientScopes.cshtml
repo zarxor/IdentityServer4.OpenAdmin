@@ -1,0 +1,38 @@
+﻿@model IdentityServer4.Models.Client
+
+@{
+}
+
+<div class="client">
+    @Html.Partial("_ClientHeader", Model)
+
+    <div class="row">
+        <div class="col-sm-10">
+            @using (Html.BeginForm("AddClientScopes", "Clients", FormMethod.Post, new
+            {
+                @class = ""
+            }))
+            {
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @Html.TextBox("scope", "", new {@class = "form-control", required = "required", placeholder = "Enter a scope name"})
+                        </div>
+                    </div>
+                </div>
+
+                //@Html.EditorFor(c)
+
+                <button class="btn btn-info">Add scope</button>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10">
+            @foreach (var scope in Model.AllowedScopes)
+            {
+                <text>@scope</text>
+            }
+        </div>
+    </div>
+</div>
