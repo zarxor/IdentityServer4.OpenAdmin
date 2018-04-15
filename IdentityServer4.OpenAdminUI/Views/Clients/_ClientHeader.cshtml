@@ -5,7 +5,8 @@
     var links = new Dictionary<string, string>
     {
         {"General", Url.Action("GetClientGeneral", new {clientId = Model.ClientId})},
-        {"Scopes", Url.Action("GetClientScopes", new {clientId = Model.ClientId})}
+        {"Scopes", Url.Action("GetClientScopes", new {clientId = Model.ClientId})},
+        {"Secrets", Url.Action("GetClientSecrets", new {clientId = Model.ClientId})}
     };
     var currentUrl = Context.Request.GetUri().AbsolutePath?.TrimEnd('/');
 }
@@ -18,7 +19,7 @@
         <span class="help-block">Client Id: @Model.ClientId</span>
     </div>
     <div class="col-sm-2">
-        @Html.ActionLink("< Back", "Index", new {}, new {@class = "btn btn-info"})
+        @Html.ActionLink("< Back", "GetClients", new {}, new {@class = "btn btn-info"})
     </div>
     <div class="col-xs-12">
         <ul class="nav nav-tabs">

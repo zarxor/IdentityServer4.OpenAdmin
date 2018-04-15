@@ -9,13 +9,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using IdentityServer4.EntityFramework.Entities;
 using IdentityServer4.EntityFramework.Interfaces;
 using IdentityServer4.EntityFramework.Mappers;
 using IdentityServer4.EntityFramework.Stores;
-using IdentityServer4.Models;
 using IdentityServer4.OpenAdminUI.Core.Stores;
+using IdentityServer4.OpenAdminUI.EntityFramework.Extensions;
+using IdentityServer4.OpenAdminUI.EntityFramework.MapperProfiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Client = IdentityServer4.Models.Client;
+using ClientSecret = IdentityServer4.OpenAdminUI.Core.Models.ClientSecret;
 
 namespace IdentityServer4.OpenAdminUI.EntityFramework.Stores
 {
@@ -28,7 +32,7 @@ namespace IdentityServer4.OpenAdminUI.EntityFramework.Stores
             : base(context, logger)
         {
             this.context = context;
-            mapper = new MapperConfiguration(cfg => cfg.AddProfile<ClientMapperProfile>()).CreateMapper();
+            mapper = new MapperConfiguration(cfg => { cfg.AddProfile<AdminClientMapperProfile>(); }).CreateMapper();
         }
 
         public async Task<List<Client>> GetClientsAsync()
@@ -78,14 +82,71 @@ namespace IdentityServer4.OpenAdminUI.EntityFramework.Stores
             return clientEntity.ToModel();
         }
 
-        public Task<Client> AddClientScopeAsync(string clientId, string scope)
+        public async Task<bool> AddClientScopeAsync(string clientId, string scope)
         {
-            throw new NotImplementedException();
+            var client = await GetClientEntityAsync(clientId);
+            if (client == null)
+                return false;
+
+            if (!client.AllowedScopes.Any(s => s.Scope.Equals(scope, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                client.AllowedScopes.Add(new ClientScope
+                {
+                    Scope = scope
+                });
+
+                await context.SaveChangesAsync();
+            }
+
+            return true;
         }
 
-        public Task<Client> RemoveClientScopeAsync(string clientId, string scope)
+        public async Task<bool> RemoveClientScopeAsync(string clientId, string scope)
         {
-            throw new NotImplementedException();
+            var client = await GetClientEntityAsync(clientId);
+            if (client == null)
+                return false;
+
+            if (client.AllowedScopes.Any(s => s.Scope.Equals(scope, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                client.AllowedScopes.RemoveAll(s => s.Scope.Equals(scope, StringComparison.InvariantCultureIgnoreCase));
+
+                await context.SaveChangesAsync();
+            }
+
+            return true;
+        }
+
+        public async Task<List<ClientSecret>> GetClientSecretsAsync(string clientId)
+        {
+            var client = await GetClientEntityAsync(clientId);
+            return client?.ClientSecrets.Select(cs => cs.ToAdminModel()).ToList();
+        }
+
+        public async Task<ClientSecret> AddClientSecretAsync(string clientId, ClientSecret clientSecret)
+        {
+            var client = await GetClientEntityAsync(clientId);
+            if (client == null)
+                return null;
+
+            var entity = clientSecret?.ToEntity();
+            client.ClientSecrets.Add(entity);
+
+            await context.SaveChangesAsync();
+
+            return entity?.ToAdminModel();
+        }
+
+        public async Task<bool> RemoveClientSecretAsync(string clientId, ClientSecret clientSecret)
+        {
+            var client = await GetClientEntityAsync(clientId);
+            if (client == null || client.ClientSecrets.All(cs => cs.Id != clientSecret.Id))
+                return false;
+
+            client.ClientSecrets.RemoveAll(cs => cs.Id == clientSecret.Id);
+            await context.SaveChangesAsync();
+
+            return true;
         }
 
         #region Private
@@ -102,7 +163,7 @@ namespace IdentityServer4.OpenAdminUI.EntityFramework.Stores
                 .Include(x => x.IdentityProviderRestrictions)
                 .Include(x => x.AllowedCorsOrigins)
                 .Include(x => x.Properties)
-                .FirstOrDefaultAsync(c => c.ClientId == clientId);
+                .FirstOrDefaultAsync(c => c.ClientId.Equals(clientId, StringComparison.InvariantCultureIgnoreCase));
         }
 
         #endregion

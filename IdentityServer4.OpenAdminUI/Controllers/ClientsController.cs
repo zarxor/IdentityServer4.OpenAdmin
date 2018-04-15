@@ -6,7 +6,9 @@
 
 using System;
 using System.Threading.Tasks;
+using IdentityModel;
 using IdentityServer4.Models;
+using IdentityServer4.OpenAdminUI.Core.Models;
 using IdentityServer4.OpenAdminUI.Core.Stores;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,6 +52,71 @@ namespace IdentityServer4.OpenAdminUI.Controllers
             return View("ClientNew", client);
         }
 
+        [HttpGet("{clientId}/token")]
+        public async Task<IActionResult> ClientAsync(string clientId)
+        {
+            return View("ClientGeneral", await adminClientStore.FindClientByIdAsync(clientId));
+        }
+
+        #region Secrets
+
+        [HttpGet("{clientId}/secrets")]
+        public async Task<IActionResult> GetClientSecrets(string clientId, [FromQuery] int removeSecret)
+        {
+            //if (!string.IsNullOrWhiteSpace(removeScope))
+            //{
+            //    await adminClientStore.RemoveClientScopeAsync(clientId, removeScope);
+            //}
+
+            return View("ClientSecrets", await adminClientStore.FindClientByIdAsync(clientId));
+        }
+
+        [HttpPost("{clientId}/secrets")]
+        public async Task<IActionResult> AddClientSecret(string clientId, [FromForm] ClientSecret clientSecret)
+        {
+            clientSecret.Value = clientSecret.Value.ToSha512();
+
+            await adminClientStore.AddClientSecretAsync(clientId, clientSecret);
+
+            return View("ClientSecrets", await adminClientStore.FindClientByIdAsync(clientId));
+        }
+
+        #endregion
+
+        #region Scopes
+
+        [HttpGet("{clientId}/scopes")]
+        public async Task<IActionResult> GetClientScopes(string clientId, [FromQuery] string removeScope)
+        {
+            if (!string.IsNullOrWhiteSpace(removeScope))
+            {
+                await adminClientStore.RemoveClientScopeAsync(clientId, removeScope);
+            }
+
+            return View("ClientScopes", await adminClientStore.FindClientByIdAsync(clientId));
+        }
+
+        [HttpPost("{clientId}/scopes")]
+        public async Task<IActionResult> AddClientScope(string clientId, [FromForm] string scope)
+        {
+            await adminClientStore.AddClientScopeAsync(clientId, scope);
+
+            return View("ClientScopes", await adminClientStore.FindClientByIdAsync(clientId));
+        }
+
+        [HttpDelete("{clientId}/scopes")]
+        public async Task<IActionResult> RemoveClientScope(string clientId, [FromForm] string scope)
+        {
+            await adminClientStore.AddClientScopeAsync(clientId, scope);
+
+            return View("ClientScopes", await adminClientStore.FindClientByIdAsync(clientId));
+        }
+
+        #endregion
+
+
+        #region General
+
         [HttpGet("{clientId}/general")]
         public async Task<IActionResult> GetClientGeneral(string clientId)
         {
@@ -64,29 +131,6 @@ namespace IdentityServer4.OpenAdminUI.Controllers
             return View("ClientGeneral", client);
         }
 
-        [HttpGet("{clientId}/scopes")]
-        public async Task<IActionResult> GetClientScopes(string clientId)
-        {
-            return View("ClientScopes", await adminClientStore.FindClientByIdAsync(clientId));
-        }
-
-        [HttpPost("{clientId}/scopes")]
-        public async Task<IActionResult> AddClientScopes(string clientId, [FromForm] string scope)
-        {
-            var client = await adminClientStore.FindClientByIdAsync(clientId);
-            if (client != null && client.AllowedScopes.Contains(scope))
-            {
-                client.AllowedScopes.Add(scope);
-                client = await adminClientStore.SaveClientAsync(client);
-            }
-
-            return View("ClientScopes", client);
-        }
-
-        [HttpGet("{clientId}/token")]
-        public async Task<IActionResult> ClientAsync(string clientId)
-        {
-            return View("ClientGeneral", await adminClientStore.FindClientByIdAsync(clientId));
-        }
+        #endregion
     }
 }

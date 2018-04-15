@@ -7,6 +7,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
+using IdentityServer4.OpenAdminUI.Core.Models;
 using IdentityServer4.Stores;
 
 namespace IdentityServer4.OpenAdminUI.Core.Stores
@@ -16,7 +17,16 @@ namespace IdentityServer4.OpenAdminUI.Core.Stores
         Task<List<Client>> GetClientsAsync();
         Task<Client> AddClientAsync(Client client);
         Task<Client> SaveClientAsync(Client client);
-        Task<Client> AddClientScopeAsync(string clientId, string scope);
-        Task<Client> RemoveClientScopeAsync(string clientId, string scope);
+        Task<bool> AddClientScopeAsync(string clientId, string scope);
+        Task<bool> RemoveClientScopeAsync(string clientId, string scope);
+        Task<List<ClientSecret>> GetClientSecretsAsync(string clientId);
+        Task<ClientSecret> AddClientSecretAsync(string clientId, ClientSecret clientSecret);
+        Task<bool> RemoveClientSecretAsync(string clientId, ClientSecret clientSecret);
+
+        //Task<bool> RemoveClientSecretAsync(string clientId, string secret);
+        //Task<bool> AddClientRedirectUriAsync(string clientId, Uri uri);
+        //Task<bool> RemoveClientRedirectUriAsync(string clientId, Uri uri);
+        //Task<bool> AddClientPostLogoutRedirectUriAsync(string clientId, Uri uri);
+        //Task<bool> RemoveClientPostLogoutRedirectUriAsync(string clientId, Uri uri);
     }
 }
