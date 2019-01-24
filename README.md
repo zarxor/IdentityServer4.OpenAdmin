@@ -1,7 +1,14 @@
 # About IdentityServer4.OpenAdmin
 > A free open source admin solution for IdentityServer4
 
-IdentityServer4.OpenAdmin is an open source and free admin contribution to the [IdentityServer4](https://github.com/IdentityServer/IdentityServer4) product. It is founded and maintained by [Johan Boström](https://www.johanbostrom.se). The project is licensed under [Apache 2](https://opensource.org/licenses/Apache-2.0) and based on .NET Core 2.x and [Vue.js](https://vuejs.org/)
+IdentityServer4.OpenAdmin is an open source and free administration tool for the [IdentityServer4](https://github.com/IdentityServer/IdentityServer4) product. It is founded and maintained by [Johan Boström](https://www.johanbostrom.se). The project is licensed under [Apache 2](https://opensource.org/licenses/Apache-2.0) and based on .NET Core 2.x and [Vue.js](https://vuejs.org/)
+
+This administration tool i meant to be able to be used with your already working IdentitiyServer4 installation.
+
+#### Some Key features:
+- API based (you can choose to only use the API)
+- Portable Admin UI, that can run on separate host if you want to
+- Dynamic UI, to support IdentityServer4 upgrades
 
 ## Installation
 Todo.. NuGet...
