@@ -9,6 +9,7 @@ This administration tool i meant to be able to be used with your already working
 - API based (you can choose to only use the API)
 - Portable Admin UI, that can run on separate host if you want to
 - Dynamic UI, to support IdentityServer4 upgrades
+- Uses the built-in features of IdentityServer4
 
 ## Installation
 Todo.. NuGet...
