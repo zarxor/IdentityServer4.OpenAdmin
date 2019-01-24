@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\IdentityServer4.OpenAdmin.API\IdentityServer4.OpenAdmin.API.csproj" />
+    <ProjectReference Include="..\..\src\IdentityServer4.OpenAdmin.InMemory\IdentityServer4.OpenAdmin.InMemory.csproj" />
+    <ProjectReference Include="..\..\src\IdentityServer4.OpenAdmin.UI\IdentityServer4.OpenAdmin.UI.csproj" />
+  </ItemGroup>
+
+</Project>

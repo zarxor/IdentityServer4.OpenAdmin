@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.1.3" />
+    <PackageReference Include="IdentityServer4" Version="2.3.2" />
+    <PackageReference Include="NJsonSchema" Version="9.13.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IdentityServer4.OpenAdmin.Core\IdentityServer4.OpenAdmin.Core.csproj" />
+  </ItemGroup>
+
+</Project>

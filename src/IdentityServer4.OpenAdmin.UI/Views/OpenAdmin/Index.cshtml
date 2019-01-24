@@ -1,0 +1,30 @@
+﻿@using IdentityServer4.OpenAdmin.UI
+@using Microsoft.Extensions.Options
+@inject IOptions<OpenAdminUIOptions> Options
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open Admin UI</title>
+    
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+    @*<link rel="stylesheet" href="~/css/site.css" />*@
+</head>
+<body>
+<div id="admin-app"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7/dist/polyfill.min.js"></script>
+<script>
+    window.$OpenAdminSettings = {
+        baseUrl: '@Context.Request.Path',
+        apiBaseUrl: '@Options.Value.ApiUrl'
+    };
+</script>
+<script src="~/js/admin-app.js" asp-append-version="true"></script>
+
+</body>
+</html>
