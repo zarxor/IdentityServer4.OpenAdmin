@@ -1,5 +1,4 @@
 New-Item -ItemType Directory -Force -Path ./nuget
-#dotnet tool install --tool-path tools SignClient
 
 $cd = Get-Location
 $projects = (
@@ -23,10 +22,8 @@ ForEach ($project in $projects)
 
 	$ErrorActionPreference = "Stop";
 	dotnet build -c Release -- $args
-	#dotnet test -c Release --no-build -- $args
 	dotnet pack -c Release -o './artifacts' --no-build
 
-	#& ./build.ps1 $args
 	Set-Location $cd
 
 	if ($LASTEXITCODE -ne 0)
