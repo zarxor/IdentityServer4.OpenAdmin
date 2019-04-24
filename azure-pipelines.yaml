@@ -3,7 +3,8 @@ trigger:
 - features/*
 
 variables:
-  buildConfiguration: 'release'  
+  buildConfiguration: 'release'
+  project.path: 'src\$(Project.Name)'
   version.major: 0
   version.minor: 0
 
@@ -13,7 +14,7 @@ jobs:
     vmImage: 'vs2017-win2016'
   steps:
     - script: |
-        dotnet build -c $(Project.Path)
+        dotnet build $(Project.Path) -c $(buildConfiguration)
         dotnet pack $(Project.Path) -c $(buildConfiguration) /p:PackageVersion=$(version.major).$(version.minor).$(version.patch) --output $(Build.ArtifactStagingDirectory) --no-build --no-restore
 
     - task: PublishBuildArtifacts@1
