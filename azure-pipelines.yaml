@@ -7,7 +7,7 @@ variables:
   project.path: 'src\$(Project.Name)'
   version.major: 0
   version.minor: 0
-  version.patch: '$(rev:rrrr)'
+  version.patch: 0
 
 jobs:
 - job: Windows
