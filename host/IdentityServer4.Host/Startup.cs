@@ -16,6 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IdentityServer4.Host
 {
+    using Quickstart.UI;
+
     public class Startup
     {
         private readonly IHostingEnvironment environment;
@@ -42,7 +44,8 @@ namespace IdentityServer4.Host
                 .AddIdentityServer()
                 .AddInMemoryClients(Clients.Get())
                 .AddInMemoryIdentityResources(Resources.GetIdentityResources())
-                .AddInMemoryApiResources(Resources.GetApiResources());
+                .AddInMemoryApiResources(Resources.GetApiResources())
+                .AddTestUsers(TestUsers.Users);
 
             if (environment.IsDevelopment())
             {

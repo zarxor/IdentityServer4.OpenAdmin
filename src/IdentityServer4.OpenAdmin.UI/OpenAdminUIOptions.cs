@@ -12,14 +12,17 @@ namespace IdentityServer4.OpenAdmin.UI
         private string path;
 
         /// <summary>
-        ///     Default: /OpenAdmin/
+        ///     Default: /admin/
         /// </summary>
         public string Path
         {
-            get => path ?? DefaultPath;
+            get => $"/{(path ?? DefaultPath).Trim('/')}/";
             set => path = value;
         }
 
         public string ApiUrl = "/admin/api/";
+        public string AuthorityUrl = "/";
+        public string AuthorityClientId = "open_admin";
+        public string AuthorityScope = "openid profile roles";
     }
 }

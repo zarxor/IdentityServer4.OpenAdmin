@@ -13,6 +13,28 @@ namespace IdentityServer4.Host.Configuration
         {
             return new List<Client>
             {
+                // Client for open admin
+                new Client
+                {
+                    ClientId = "open_admin",
+                    ClientName = "Open Admin",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris =  { "https://localhost:44375/admin#/oidc-signin&" },
+                    FrontChannelLogoutUri = "https://localhost:44375/admin",
+                    PostLogoutRedirectUris = { "https://localhost:44375/admin" },
+
+                    RequireConsent = false,
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "roles"
+                    }
+                },
+
                 ///////////////////////////////////////////
                 // Console Client Credentials Flow Sample
                 //////////////////////////////////////////

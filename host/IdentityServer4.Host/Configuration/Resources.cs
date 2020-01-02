@@ -18,6 +18,7 @@ namespace IdentityServer4.Host.Configuration
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
+                new IdentityResource("roles", "Roles", new []{ "role" }), 
 
                 // custom identity resource with some consolidated claims
                 new IdentityResource("custom.profile", new[] { JwtClaimTypes.Name, JwtClaimTypes.Email, "location" })

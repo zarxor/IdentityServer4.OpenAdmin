@@ -1,5 +1,6 @@
 <template>
-    <v-app v-if="loadingMetadata || loadingRoutes">
+    <authenticate v-if="!$root.identity.isAuthenticated"></authenticate>
+    <v-app v-else-if="loadingMetadata || loadingRoutes">
         <v-container>
             <v-layout align-center
                       justify-center
@@ -13,7 +14,7 @@
             </v-layout>
         </v-container>
     </v-app>
-  <router-view v-else></router-view>
+    <router-view v-else></router-view>
 </template>
 
 <script>
@@ -23,11 +24,16 @@
     import dashboard from '@/pages/Dashboard';
     import list from '@/pages/List';
     import editor from '@/pages/Editor';
+    import authenticate from '@/pages/Authenticate';
 
     export default {
         created() {
-            console.log(this.$OpenAdmin);
+            console.log(this);
+            if (!this.$root.identity.isAuthenticated)
+                this.$Identity.authenticate(this.$root._route.fullPath);
+
             console.log(window.$OpenAdminSettings);
+            console.log(this.$OpenAdmin);
 
             this.$http
                 .get(this.$OpenAdmin.settings.baseUrl + "/api/routes")
@@ -38,6 +44,11 @@
                             component: layout,
                             redirect: '/dashboard',
                             children: this.getRoutes(response.data)
+                        },
+                        {
+                            path: '/',
+                            component: layout,
+                            redirect: '/signin-oidc'
                         }
                     ];
 
@@ -57,6 +68,9 @@
                 }, response => {
                     //this.loadingMetadata = false;
                 });
+        },
+        components: {
+            authenticate
         },
         data: () => ({
             loadingMetadata: true,

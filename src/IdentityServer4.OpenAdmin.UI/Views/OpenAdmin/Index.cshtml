@@ -3,6 +3,11 @@
 @inject IOptions<OpenAdminUIOptions> Options
 @{
     Layout = null;
+
+    string GetBaseUrl()
+    {
+        return $"{Context.Request.Scheme}://{Context.Request.Host}{Options.Value.Path.TrimEnd('/')}";
+    }
 }
 <!DOCTYPE html>
 <html>
@@ -11,20 +16,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Open Admin UI</title>
     
-    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+    @*<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">*@
     @*<link rel="stylesheet" href="~/css/site.css" />*@
 </head>
 <body>
 <div id="admin-app"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7/dist/polyfill.min.js"></script>
+@*<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7/dist/polyfill.min.js"></script>*@
 <script>
     window.$OpenAdminSettings = {
-        baseUrl: '@Context.Request.Path',
-        apiBaseUrl: '@Options.Value.ApiUrl'
+        baseUrl: '@GetBaseUrl()',
+        apiBaseUrl: '@Options.Value.ApiUrl.TrimEnd('/')/',
+        authority: {
+            authority: '@(Options.Value.AuthorityUrl)',
+            client_id: '@Options.Value.AuthorityClientId',
+            scope: '@Options.Value.AuthorityScope'
+        }
     };
 </script>
-<script src="~/js/admin-app.js" asp-append-version="true"></script>
+<script src="~/js/admin-app.js"></script>
 
 </body>
 </html>
