@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IdentityServer4.OpenAdmin.Core\IdentityServer4.OpenAdmin.Core.csproj" />
+    <ProjectReference Include="..\Core\IdentityServer4.OpenAdmin.Core.csproj" />
   </ItemGroup>
 
 </Project>

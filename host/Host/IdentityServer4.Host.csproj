@@ -14,9 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\IdentityServer4.OpenAdmin.API\IdentityServer4.OpenAdmin.API.csproj" />
-    <ProjectReference Include="..\..\src\IdentityServer4.OpenAdmin.InMemory\IdentityServer4.OpenAdmin.InMemory.csproj" />
-    <ProjectReference Include="..\..\src\IdentityServer4.OpenAdmin.UI\IdentityServer4.OpenAdmin.UI.csproj" />
+    <ProjectReference Include="..\..\src\API\IdentityServer4.OpenAdmin.API.csproj" />
+    <ProjectReference Include="..\..\src\InMemory\IdentityServer4.OpenAdmin.InMemory.csproj" />
+    <ProjectReference Include="..\..\src\UI\IdentityServer4.OpenAdmin.UI.csproj" />
   </ItemGroup>
 
 </Project>
