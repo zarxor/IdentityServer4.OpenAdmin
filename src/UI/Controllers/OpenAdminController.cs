@@ -41,8 +41,9 @@ namespace IdentityServer4.OpenAdmin.UI.Controllers
             using (var httpClient = new HttpClient())
             {
                 var url = options.ApiUrl.StartsWith("/")
-                    ? $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/{options.ApiUrl}"
+                    ? $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}{options.ApiUrl}"
                     : options.ApiUrl;
+                url = url.TrimEnd('/');
                 var dataResponse = await httpClient.GetStringAsync($"{url}/metadata/contracts");
                 var dataContracts =
                     JsonConvert.DeserializeObject<Dictionary<string, DataContractDefinition>>(dataResponse,

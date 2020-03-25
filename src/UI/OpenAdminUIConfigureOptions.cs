@@ -15,9 +15,9 @@ namespace IdentityServer4.OpenAdmin.UI
 {
     internal class OpenAdminUIConfigureOptions : IPostConfigureOptions<StaticFileOptions>
     {
-        private readonly IHostingEnvironment environment;
+        private readonly IWebHostEnvironment environment;
 
-        public OpenAdminUIConfigureOptions(IHostingEnvironment environment) => this.environment = environment;
+        public OpenAdminUIConfigureOptions(IWebHostEnvironment environment) => this.environment = environment;
 
         public void PostConfigure(string name, StaticFileOptions options)
         {

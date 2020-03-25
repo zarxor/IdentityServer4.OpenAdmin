@@ -41,7 +41,7 @@ namespace IdentityServer4.OpenAdmin.API.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchAsync(string id,
+        public new async Task<IActionResult> PatchAsync(string id,
             [FromBody] JsonPatchDocument<ClientContract> document)
         {
             return await base.PatchAsync(id, document);

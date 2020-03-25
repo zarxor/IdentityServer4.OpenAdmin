@@ -20,6 +20,7 @@ using NJsonSchema.Generation;
 
 namespace IdentityServer4.OpenAdmin.API.Controllers
 {
+    [ApiController]
     [Route(OpenAdminApiOptions.DefaultApiPrefix + "metadata")]
     public class MetadataController : Controller
     {
@@ -61,7 +62,7 @@ namespace IdentityServer4.OpenAdmin.API.Controllers
             //    PreserveReferencesHandling.All;
             foreach (var type in fetchFrom)
             {
-                var schema = await JsonSchema4.FromTypeAsync(type, generatorSettings);
+                var schema = JsonSchema.FromType(type, generatorSettings);
                 schemas.Add(ToLowerFirstLetter(type.Name), JsonConvert.DeserializeObject(schema.ToJson()));
             }
 

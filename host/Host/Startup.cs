@@ -11,8 +11,8 @@ using IdentityServer4.OpenAdmin.InMemory.Extensions;
 using IdentityServer4.OpenAdmin.UI.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace IdentityServer4.Host
 {
@@ -20,14 +20,19 @@ namespace IdentityServer4.Host
 
     public class Startup
     {
-        private readonly IHostingEnvironment environment;
+        private readonly IWebHostEnvironment environment;
 
-        public Startup(IHostingEnvironment environment) => this.environment = environment;
+        public Startup(IWebHostEnvironment environment) => this.environment = environment;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
+            services.AddControllers()
+                .AddNewtonsoftJson();
+            //services.AddNewtonsoftJson();
+
             services.AddOpenAdminApi(/*o => o.ApiPrefix = "/test-api/"*/);
             services.AddOpenAdminInMemoryIdentityResources();
             services.AddOpenAdminUI(o =>
@@ -36,7 +41,7 @@ namespace IdentityServer4.Host
                 //o.ApiUrl = "/test-api/";
             });
 
-            services.AddMvc();
+            //services.AddMvc();
 
                 //.AddOpenAdminApiEF();
 
@@ -59,25 +64,29 @@ namespace IdentityServer4.Host
             services.AddAuthentication();
         }
 
-        private void ContextOptionsBuilder(DbContextOptionsBuilder options)
-        {
-            var migrationsAssemblyName = GetType().Assembly.GetName().Name;
-            options.UseSqlServer(
-                "Server=(localdb)\\MSSQLLocalDB;Database=IdentityServer4.OpenAdminUI;Trusted_Connection=True;MultipleActiveResultSets=true",
-                b => b.MigrationsAssembly(migrationsAssemblyName));
-        }
+        //private void ContextOptionsBuilder(DbContextOptionsBuilder options)
+        //{
+        //    var migrationsAssemblyName = GetType().Assembly.GetName().Name;
+        //    options.UseSqlServer(
+        //        "Server=(localdb)\\MSSQLLocalDB;Database=IdentityServer4.OpenAdminUI;Trusted_Connection=True;MultipleActiveResultSets=true",
+        //        b => b.MigrationsAssembly(migrationsAssemblyName));
+        //}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseIdentityServer()
-                .UseStaticFiles()
-                .UseMvcWithDefaultRoute();
+            app.UseStaticFiles()
+                .UseRouting()
+                .UseIdentityServer()
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints.MapDefaultControllerRoute();
+                });
         }
     }
 }
