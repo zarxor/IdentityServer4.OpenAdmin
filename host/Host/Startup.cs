@@ -7,22 +7,28 @@
 using System;
 using IdentityServer4.Host.Configuration;
 using IdentityServer4.OpenAdmin.API.Extensions;
+using IdentityServer4.OpenAdmin.BlazorClient.Extensions;
 using IdentityServer4.OpenAdmin.InMemory.Extensions;
-using IdentityServer4.OpenAdmin.UI.Extensions;
+using IdentityServer4.Quickstart.UI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace IdentityServer4.Host
 {
-    using Quickstart.UI;
-
     public class Startup
     {
-        private readonly IWebHostEnvironment environment;
+        public IWebHostEnvironment Environment;
 
-        public Startup(IWebHostEnvironment environment) => this.environment = environment;
+        public Startup(IWebHostEnvironment environment, IConfiguration configuration)
+        {
+            Environment = environment;
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -30,20 +36,25 @@ namespace IdentityServer4.Host
         {
             services.AddControllersWithViews();
             services.AddControllers()
-                .AddNewtonsoftJson();
-            //services.AddNewtonsoftJson();
+                .AddNewtonsoftJson(); // Required for APIs
 
-            services.AddOpenAdminApi(/*o => o.ApiPrefix = "/test-api/"*/);
+            services.AddOpenAdminApi( /*o => o.ApiPrefix = "/test-api/"*/);
             services.AddOpenAdminInMemoryIdentityResources();
-            services.AddOpenAdminUI(o =>
+            services.AddOpenAdminBlazorClient(options =>
             {
-                //o.Path = "/open/";
-                //o.ApiUrl = "/test-api/";
+                //options.AddRazorPages = false; // True by default
+                //options.AddServerSideBlazor = false; // True by default
+                //options.ApiUrl = "/test-api/"; // Default set to "/admin/api/"
             });
 
-            //services.AddMvc();
 
-                //.AddOpenAdminApiEF();
+            ////services.AddOpenAdminUI(o =>
+            ////{
+            ////    //o.Path = "/open/";
+            ////    //o.ApiUrl = "/test-api/";
+            ////});
+
+            ////.AddOpenAdminApiEF();
 
             var identityServerBuilder = services
                 .AddIdentityServer()
@@ -52,7 +63,7 @@ namespace IdentityServer4.Host
                 .AddInMemoryApiResources(Resources.GetApiResources())
                 .AddTestUsers(TestUsers.Users);
 
-            if (environment.IsDevelopment())
+            if (Environment.IsDevelopment())
             {
                 identityServerBuilder.AddDeveloperSigningCredential();
             }
@@ -78,15 +89,28 @@ namespace IdentityServer4.Host
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseWebAssemblyDebugging();
             }
 
-            app.UseStaticFiles()
-                .UseRouting()
-                .UseIdentityServer()
-                .UseEndpoints(endpoints =>
+            app.UseHttpsRedirection();
+            //app.UseBlazorFrameworkFiles("/portal");
+            app.UseStaticFiles();
+
+            app.Map("/portal", child =>
+            {
+                child.UseRouting();
+                child.UseEndpoints(endpoints =>
                 {
-                    endpoints.MapDefaultControllerRoute();
+                    endpoints.MapBlazorHub();
+                    endpoints.MapFallbackToPage("/_Host");
+                    //endpoints.MapFallbackToFile("portal/index.html");
                 });
+            });
+
+            app.UseRouting();
+            app.UseIdentityServer();
+
+            app.UseEndpoints(endpoints => { endpoints.MapDefaultControllerRoute(); });
         }
     }
 }

@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\API.Shared\IdentityServer4.OpenAdmin.API.Shared.csproj" />
     <ProjectReference Include="..\Core\IdentityServer4.OpenAdmin.Core.csproj" />
   </ItemGroup>
 

@@ -1,0 +1,43 @@
+﻿@inherits ComponentBase
+@using Newtonsoft.Json
+@using TypeSupport.Extensions
+@typeparam TContractModel 
+
+
+<div class="row">
+    <div class="col-md-4 align-items-center d-flex">
+        <RadzenLabel Text="@Field.Name" /><br />
+        <RadzenLabel Text="@Field.Description" />
+    </div>
+    <div class="col-md-8">
+        @if (Field.Type == "text-input" && Field.Format == "text")
+        {
+            <RadzenTextBox Value="@(GetValue<string>())"
+                           @oninput="@(args => SetValue(args.Value))" />
+        }
+        else if (Field.Type == "checkbox")
+        {
+            <RadzenCheckBox TValue="bool"
+                            Value="@(GetValue<bool>())"
+                            Change="@(args => SetValue(args))" />
+        }
+        @*else if (field.Type == "combobox")
+        {
+            <RadzenListBox TValue="ICollection<string>"
+                            Value="@(contract.GetPropertyValue<ICollection<string>>(field.PropertyName))"
+                            Change="@(args => contract.SetPropertyValue(field.PropertyName, args))">
+                <Template>
+                    Company: @((context as string))
+                </Template>
+            </RadzenListBox>
+        }*@
+        @*else if (field.Type == "text-input" && field.Format == "number")
+        {
+            <RadzenTextBox Value="@(client.GetPropertyValue<int?>(field.PropertyName).ToString())" />
+        }*@
+        else
+        {
+            <small>@Field.Type - @Field.Format</small>
+        }
+    </div>
+</div>

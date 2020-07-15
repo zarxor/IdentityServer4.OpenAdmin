@@ -9,9 +9,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.0-preview2.20160.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\API\IdentityServer4.OpenAdmin.API.csproj" />
+    <ProjectReference Include="..\..\src\Client\IdentityServer4.OpenAdmin.BlazorClient.csproj" />
     <ProjectReference Include="..\..\src\InMemory\IdentityServer4.OpenAdmin.InMemory.csproj" />
-    <ProjectReference Include="..\..\src\UI\IdentityServer4.OpenAdmin.UI.csproj" />
   </ItemGroup>
 
 </Project>

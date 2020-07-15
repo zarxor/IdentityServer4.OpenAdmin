@@ -1,0 +1,29 @@
+﻿@page "/clients"
+@page "/clients/{id}"
+
+@using IdentityServer4.OpenAdmin.API.Shared.Contracts
+@using Microsoft.AspNetCore.Http
+
+@if (string.IsNullOrWhiteSpace(Id))
+{
+    <h1>Clients</h1>
+    <ApiEndpointList TContractModel="ClientContract"
+                     PagePath="clients"
+                     EndpointName="clients"
+                     ContractId="client => client.ClientId"
+                     ContractHeader="client => client.ClientName"></ApiEndpointList>
+}
+else
+{
+    <ApiEndpointEditor TContractModel="ClientContract" 
+                       EndpointName="clients"
+                       DefinitionName="client"
+                       Header="model => model.ClientName"
+                       Description="model => model.Description"
+                       Id="@Id" />
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+}

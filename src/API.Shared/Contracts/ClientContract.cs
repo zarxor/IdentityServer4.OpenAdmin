@@ -5,11 +5,10 @@
 //  
 
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using IdentityServer4.Models;
 
-namespace IdentityServer4.OpenAdmin.API.Contracts
+namespace IdentityServer4.OpenAdmin.API.Shared.Contracts
 {
     public class ClientContract : Client
     {

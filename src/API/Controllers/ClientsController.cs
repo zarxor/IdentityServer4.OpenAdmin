@@ -6,7 +6,7 @@
 
 using System.Threading.Tasks;
 using IdentityServer4.Models;
-using IdentityServer4.OpenAdmin.API.Contracts;
+using IdentityServer4.OpenAdmin.API.Shared.Contracts;
 using IdentityServer4.OpenAdmin.Core.Stores;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;

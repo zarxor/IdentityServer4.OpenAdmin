@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
+using IdentityServer4.OpenAdmin.API.Shared.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -54,9 +55,11 @@ namespace IdentityServer4.OpenAdmin.API.Controllers
 
             //var generator = new JSchemaGenerator {ContractResolver = new CamelCasePropertyNamesContractResolver()};
             var schemas = new Dictionary<string, object>();
-            var generatorSettings = new JsonSchemaGeneratorSettings();
-            generatorSettings.SerializerSettings = new JsonSerializerSettings();
-            generatorSettings.FlattenInheritanceHierarchy = true;
+            var generatorSettings = new JsonSchemaGeneratorSettings
+            {
+                SerializerSettings = new JsonSerializerSettings(), 
+                FlattenInheritanceHierarchy = true
+            };
             generatorSettings.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             //generatorSettings.SerializerSettings.PreserveReferencesHandling =
             //    PreserveReferencesHandling.All;

@@ -1,0 +1,30 @@
+﻿@page "/api-resources"
+@page "/api-resources/{id}"
+
+@inject HttpClient HttpClient;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using IdentityServer4.OpenAdmin.API.Shared.Contracts
+@using Microsoft.AspNetCore.Http
+
+@if (string.IsNullOrWhiteSpace(Id))
+{
+    <h1>API Resources</h1>
+    <ApiEndpointList TContractModel="ApiResourceContract"
+                     PagePath="api-resources"
+                     EndpointName="api-resources"
+                     ContractId="model => model.Name"
+                     ContractHeader="model => model.DisplayName"></ApiEndpointList>
+}
+else
+{
+    <ApiEndpointEditor TContractModel="ApiResourceContract" 
+                       EndpointName="api-resources"
+                       DefinitionName="apiResource"
+                       Header="model => model.DisplayName"
+                       Id="@Id" />
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+}

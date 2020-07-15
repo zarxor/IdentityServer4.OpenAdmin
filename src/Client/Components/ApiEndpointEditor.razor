@@ -1,0 +1,40 @@
+﻿@inherits ComponentBase
+@using Newtonsoft.Json
+@using TypeSupport.Extensions
+@typeparam TContractModel
+
+
+@if (contract == null || fieldsContainers == null)
+{
+    <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" Style="margin-bottom: 20px"/>
+}
+else
+{
+    <h1>@Header(contract)</h1>
+    <RadzenButton Click="Save" Disabled="@(!JsonPatchDocument.Operations.Any())" Text="Save"></RadzenButton>
+    <RadzenTabs>
+        <Tabs>
+            @foreach (var fieldsContainer in fieldsContainers)
+            {
+            <RadzenTabsItem Text="@fieldsContainer.Name">
+                @foreach (var field in fieldsContainer.Fields)
+                {
+                    <FieldInput Contract="contract" Field="field" />
+                    @*else if (field.Type == "text-input" && field.Format == "number")
+            {
+                <RadzenTextBox Value="@(client.GetPropertyValue<int?>(field.PropertyName).ToString())" />
+            }*@
+                }
+            </RadzenTabsItem>
+            }
+        </Tabs>
+    </RadzenTabs>
+    <pre>
+        @JsonConvert.SerializeObject(JsonPatchDocument);
+    </pre>
+}
+
+@code
+{
+
+}

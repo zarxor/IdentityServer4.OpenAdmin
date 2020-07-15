@@ -1,0 +1,61 @@
+﻿@inherits Microsoft.AspNetCore.Components.LayoutComponentBase
+
+<RadzenDialog />
+<RadzenNotification />
+
+<RadzenHeader>
+    <ChildContent>
+        <div class="row justify-content-start align-items-center">
+            <div class="col-md-6 d-flex align-items-center">
+                <RadzenSidebarToggle Click="@MainSidebarToggleClick">
+                </RadzenSidebarToggle>
+                <RadzenLabel Text="Open Admin">
+                </RadzenLabel>
+            </div>
+            <div class="col-md-6 text-lg-right">
+            </div>
+        </div>
+    </ChildContent>
+</RadzenHeader>
+<RadzenBody @ref="mainBody">
+    <ChildContent>
+        <RadzenContentContainer Name="main">
+            @Body
+        </RadzenContentContainer>
+    </ChildContent>
+</RadzenBody>
+<RadzenSidebar @ref="mainSidebar">
+    <ChildContent>
+        <RadzenPanelMenu style="height: 100%">
+            <ChildContent>
+                <RadzenPanelMenuItem Text="Clients" Path="clients">
+                </RadzenPanelMenuItem>
+                <RadzenPanelMenuItem Text="API Resources" Path="api-resources">
+                </RadzenPanelMenuItem>
+            </ChildContent>
+        </RadzenPanelMenu>
+    </ChildContent>
+</RadzenSidebar>
+<RadzenFooter>
+    <ChildContent>
+        <RadzenLabel Text="Blazor, Copyright &copy; 2019">
+        </RadzenLabel>
+    </ChildContent>
+</RadzenFooter>
+
+@code
+{
+    private RadzenBody mainBody;
+    private RadzenSidebar mainSidebar;
+
+    private async void MainSidebarToggleClick(dynamic args)
+    {
+        mainSidebar.Toggle();
+        mainBody.Toggle();
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+}

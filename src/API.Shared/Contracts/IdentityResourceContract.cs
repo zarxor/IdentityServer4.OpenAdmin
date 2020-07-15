@@ -7,7 +7,7 @@
 using System.Collections.Generic;
 using IdentityServer4.Models;
 
-namespace IdentityServer4.OpenAdmin.API.Contracts
+namespace IdentityServer4.OpenAdmin.API.Shared.Contracts
 {
     public class IdentityResourceContract : IdentityResource
     {

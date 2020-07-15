@@ -21,9 +21,9 @@ namespace IdentityServer4.Host.Configuration
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris =  { "https://localhost:44375/admin#/oidc-signin&" },
+                    RedirectUris = {"https://localhost:44375/admin#/oidc-signin&"},
                     FrontChannelLogoutUri = "https://localhost:44375/admin",
-                    PostLogoutRedirectUris = { "https://localhost:44375/admin" },
+                    PostLogoutRedirectUris = {"https://localhost:44375/admin"},
 
                     RequireConsent = false,
 
@@ -41,14 +41,14 @@ namespace IdentityServer4.Host.Configuration
                 new Client
                 {
                     ClientId = "client",
-                    ClientSecrets = { new Secret("secret".Sha256()) },
+                    ClientSecrets = {new Secret("secret".Sha256())},
 
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = { "api1", "api2.read_only" },
+                    AllowedScopes = {"api1", "api2.read_only"},
                     Properties =
                     {
-                        { "propKey1", "propValue1" },
-                        { "propKey2", "propValue2" }
+                        {"propKey1", "propValue1"},
+                        {"propKey2", "propValue2"}
                     }
                 },
 
@@ -63,12 +63,13 @@ namespace IdentityServer4.Host.Configuration
                         new Secret
                         {
                             Type = IdentityServerConstants.SecretTypes.X509CertificateBase64,
-                            Value = "MIIDATCCAe2gAwIBAgIQoHUYAquk9rBJcq8W+F0FAzAJBgUrDgMCHQUAMBIxEDAOBgNVBAMTB0RldlJvb3QwHhcNMTAwMTIwMjMwMDAwWhcNMjAwMTIwMjMwMDAwWjARMQ8wDQYDVQQDEwZDbGllbnQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDSaY4x1eXqjHF1iXQcF3pbFrIbmNw19w/IdOQxbavmuPbhY7jX0IORu/GQiHjmhqWt8F4G7KGLhXLC1j7rXdDmxXRyVJBZBTEaSYukuX7zGeUXscdpgODLQVay/0hUGz54aDZPAhtBHaYbog+yH10sCXgV1Mxtzx3dGelA6pPwiAmXwFxjJ1HGsS/hdbt+vgXhdlzud3ZSfyI/TJAnFeKxsmbJUyqMfoBl1zFKG4MOvgHhBjekp+r8gYNGknMYu9JDFr1ue0wylaw9UwG8ZXAkYmYbn2wN/CpJl3gJgX42/9g87uLvtVAmz5L+rZQTlS1ibv54ScR2lcRpGQiQav/LAgMBAAGjXDBaMBMGA1UdJQQMMAoGCCsGAQUFBwMCMEMGA1UdAQQ8MDqAENIWANpX5DZ3bX3WvoDfy0GhFDASMRAwDgYDVQQDEwdEZXZSb290ghAsWTt7E82DjU1E1p427Qj2MAkGBSsOAwIdBQADggEBADLje0qbqGVPaZHINLn+WSM2czZk0b5NG80btp7arjgDYoWBIe2TSOkkApTRhLPfmZTsaiI3Ro/64q+Dk3z3Kt7w+grHqu5nYhsn7xQFAQUf3y2KcJnRdIEk0jrLM4vgIzYdXsoC6YO+9QnlkNqcN36Y8IpSVSTda6gRKvGXiAhu42e2Qey/WNMFOL+YzMXGt/nDHL/qRKsuXBOarIb++43DV3YnxGTx22llhOnPpuZ9/gnNY7KLjODaiEciKhaKqt/b57mTEz4jTF4kIg6BP03MUfDXeVlM1Qf1jB43G2QQ19n5lUiqTpmQkcfLfyci2uBZ8BkOhXr3Vk9HIk/xBXQ="
+                            Value =
+                                "MIIDATCCAe2gAwIBAgIQoHUYAquk9rBJcq8W+F0FAzAJBgUrDgMCHQUAMBIxEDAOBgNVBAMTB0RldlJvb3QwHhcNMTAwMTIwMjMwMDAwWhcNMjAwMTIwMjMwMDAwWjARMQ8wDQYDVQQDEwZDbGllbnQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDSaY4x1eXqjHF1iXQcF3pbFrIbmNw19w/IdOQxbavmuPbhY7jX0IORu/GQiHjmhqWt8F4G7KGLhXLC1j7rXdDmxXRyVJBZBTEaSYukuX7zGeUXscdpgODLQVay/0hUGz54aDZPAhtBHaYbog+yH10sCXgV1Mxtzx3dGelA6pPwiAmXwFxjJ1HGsS/hdbt+vgXhdlzud3ZSfyI/TJAnFeKxsmbJUyqMfoBl1zFKG4MOvgHhBjekp+r8gYNGknMYu9JDFr1ue0wylaw9UwG8ZXAkYmYbn2wN/CpJl3gJgX42/9g87uLvtVAmz5L+rZQTlS1ibv54ScR2lcRpGQiQav/LAgMBAAGjXDBaMBMGA1UdJQQMMAoGCCsGAQUFBwMCMEMGA1UdAQQ8MDqAENIWANpX5DZ3bX3WvoDfy0GhFDASMRAwDgYDVQQDEwdEZXZSb290ghAsWTt7E82DjU1E1p427Qj2MAkGBSsOAwIdBQADggEBADLje0qbqGVPaZHINLn+WSM2czZk0b5NG80btp7arjgDYoWBIe2TSOkkApTRhLPfmZTsaiI3Ro/64q+Dk3z3Kt7w+grHqu5nYhsn7xQFAQUf3y2KcJnRdIEk0jrLM4vgIzYdXsoC6YO+9QnlkNqcN36Y8IpSVSTda6gRKvGXiAhu42e2Qey/WNMFOL+YzMXGt/nDHL/qRKsuXBOarIb++43DV3YnxGTx22llhOnPpuZ9/gnNY7KLjODaiEciKhaKqt/b57mTEz4jTF4kIg6BP03MUfDXeVlM1Qf1jB43G2QQ19n5lUiqTpmQkcfLfyci2uBZ8BkOhXr3Vk9HIk/xBXQ="
                         }
                     },
 
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = { "api1", "api2.read_only" }
+                    AllowedScopes = {"api1", "api2.read_only"}
                 },
 
                 ///////////////////////////////////////////
@@ -77,13 +78,13 @@ namespace IdentityServer4.Host.Configuration
                 new Client
                 {
                     ClientId = "client.custom",
-                    ClientSecrets = 
+                    ClientSecrets =
                     {
                         new Secret("secret".Sha256())
                     },
 
-                    AllowedGrantTypes = { "custom", "custom.nosubject" },
-                    AllowedScopes = { "api1", "api2.read_only" }
+                    AllowedGrantTypes = {"custom", "custom.nosubject"},
+                    AllowedScopes = {"api1", "api2.read_only"}
                 },
 
                 ///////////////////////////////////////////
@@ -92,7 +93,7 @@ namespace IdentityServer4.Host.Configuration
                 new Client
                 {
                     ClientId = "roclient",
-                    ClientSecrets = 
+                    ClientSecrets =
                     {
                         new Secret("secret".Sha256())
                     },
@@ -100,7 +101,7 @@ namespace IdentityServer4.Host.Configuration
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
 
                     AllowOfflineAccess = true,
-                    AllowedScopes = 
+                    AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         "custom.profile",
@@ -119,7 +120,7 @@ namespace IdentityServer4.Host.Configuration
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
 
                     AllowOfflineAccess = true,
-                    AllowedScopes = 
+                    AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Email,
@@ -139,7 +140,7 @@ namespace IdentityServer4.Host.Configuration
                     AllowedGrantTypes = GrantTypes.Hybrid,
                     RequirePkce = true,
 
-                    RedirectUris = { "http://127.0.0.1", "sample-windows-client://callback" },
+                    RedirectUris = {"http://127.0.0.1", "sample-windows-client://callback"},
 
                     AllowOfflineAccess = true,
 
@@ -158,13 +159,13 @@ namespace IdentityServer4.Host.Configuration
                 new Client
                 {
                     ClientId = "roclient.reference",
-                    ClientSecrets = 
+                    ClientSecrets =
                     {
                         new Secret("secret".Sha256())
                     },
 
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-                    AllowedScopes = { "api1", "api2.read_only" },
+                    AllowedScopes = {"api1", "api2.read_only"},
 
                     AccessTokenType = AccessTokenType.Reference
                 },
@@ -181,9 +182,9 @@ namespace IdentityServer4.Host.Configuration
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris =  { "http://localhost:44077/signin-oidc" },
+                    RedirectUris = {"http://localhost:44077/signin-oidc"},
                     FrontChannelLogoutUri = "http://localhost:44077/signout-oidc",
-                    PostLogoutRedirectUris = { "http://localhost:44077/signout-callback-oidc" },
+                    PostLogoutRedirectUris = {"http://localhost:44077/signout-callback-oidc"},
 
                     AllowedScopes =
                     {
@@ -205,14 +206,15 @@ namespace IdentityServer4.Host.Configuration
 
                     AllowedGrantTypes = GrantTypes.Implicit,
 
-                    RedirectUris = { "http://localhost:44078/home/callback" },
-                    PostLogoutRedirectUris = { "http://localhost:44078/" },
+                    RedirectUris = {"http://localhost:44078/home/callback"},
+                    PostLogoutRedirectUris = {"http://localhost:44078/"},
                     FrontChannelLogoutUri = "http://localhost:44078/home/FrontChannelLogout",
                     BackChannelLogoutUri = "http://localhost:44078/home/BackChannelLogout",
 
-                    AllowedScopes = {
+                    AllowedScopes =
+                    {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Profile
                     }
                 },
 
@@ -226,21 +228,21 @@ namespace IdentityServer4.Host.Configuration
                     ClientUri = "http://identityserver.io",
                     //LogoUri = "https://pbs.twimg.com/profile_images/1612989113/Ki-hanja_400x400.png",
 
-                    ClientSecrets = 
+                    ClientSecrets =
                     {
                         new Secret("secret".Sha256())
                     },
-                    
+
                     AllowedGrantTypes = GrantTypes.Hybrid,
                     AllowAccessTokensViaBrowser = false,
 
-                    RedirectUris = { "http://localhost:21402/signin-oidc" },
+                    RedirectUris = {"http://localhost:21402/signin-oidc"},
                     FrontChannelLogoutUri = "http://localhost:21402/signout-oidc",
-                    PostLogoutRedirectUris = { "http://localhost:21402/signout-callback-oidc" },
+                    PostLogoutRedirectUris = {"http://localhost:21402/signout-callback-oidc"},
 
                     AllowOfflineAccess = true,
 
-                    AllowedScopes = 
+                    AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
@@ -265,9 +267,9 @@ namespace IdentityServer4.Host.Configuration
                     AllowedGrantTypes = GrantTypes.Hybrid,
                     AllowAccessTokensViaBrowser = false,
 
-                    RedirectUris = { "http://localhost:21403/signin-oidc" },
+                    RedirectUris = {"http://localhost:21403/signin-oidc"},
                     BackChannelLogoutUri = "http://localhost:21403/logout",
-                    PostLogoutRedirectUris = { "http://localhost:21403/signout-callback-oidc" },
+                    PostLogoutRedirectUris = {"http://localhost:21403/signout-callback-oidc"},
 
                     AllowOfflineAccess = true,
 
@@ -299,9 +301,9 @@ namespace IdentityServer4.Host.Configuration
 
                     AccessTokenLifetime = 75,
 
-                    RedirectUris = { "http://localhost:21404/signin-oidc" },
+                    RedirectUris = {"http://localhost:21404/signin-oidc"},
                     FrontChannelLogoutUri = "http://localhost:21404/signout-oidc",
-                    PostLogoutRedirectUris = { "http://localhost:21404/signout-callback-oidc" },
+                    PostLogoutRedirectUris = {"http://localhost:21404/signout-callback-oidc"},
 
                     AllowOfflineAccess = true,
 
@@ -327,10 +329,10 @@ namespace IdentityServer4.Host.Configuration
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris = { "http://localhost:28895/index.html" },
-                    AllowedScopes = { "api1", "api2.read_only" }
+                    RedirectUris = {"http://localhost:28895/index.html"},
+                    AllowedScopes = {"api1", "api2.read_only"}
                 },
-                
+
                 ///////////////////////////////////////////
                 // JS OIDC Sample
                 //////////////////////////////////////////
@@ -346,7 +348,7 @@ namespace IdentityServer4.Host.Configuration
                     RequireClientSecret = false,
                     AccessTokenType = AccessTokenType.Jwt,
 
-                    RedirectUris = 
+                    RedirectUris =
                     {
                         "http://localhost:7017/index.html",
                         "http://localhost:7017/callback.html",
@@ -354,8 +356,8 @@ namespace IdentityServer4.Host.Configuration
                         "http://localhost:7017/popup.html"
                     },
 
-                    PostLogoutRedirectUris = { "http://localhost:7017/index.html" },
-                    AllowedCorsOrigins = { "http://localhost:7017" },
+                    PostLogoutRedirectUris = {"http://localhost:7017/index.html"},
+                    AllowedCorsOrigins = {"http://localhost:7017"},
 
                     AllowedScopes =
                     {
@@ -379,7 +381,7 @@ namespace IdentityServer4.Host.Configuration
 
                     AllowOfflineAccess = true,
 
-                    AllowedCorsOrigins = { "http://localhost:5001" }, // JS test client only
+                    AllowedCorsOrigins = {"http://localhost:5001"}, // JS test client only
 
                     AllowedScopes =
                     {

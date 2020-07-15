@@ -6,7 +6,7 @@
 
 using AutoMapper;
 using IdentityServer4.Models;
-using IdentityServer4.OpenAdmin.API.Contracts;
+using IdentityServer4.OpenAdmin.API.Shared.Contracts;
 
 namespace IdentityServer4.OpenAdmin.API
 {

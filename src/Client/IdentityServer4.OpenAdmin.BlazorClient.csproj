@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+    <StaticWebAssetBasePath>portal</StaticWebAssetBasePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazor-State" Version="3.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="2.2.0" />
+    <PackageReference Include="Tabler.Blazor" Version="0.0.1.1" />
+  </ItemGroup>
+
+  <!-- When publishing, swap service-worker.published.js in place of service-worker.js -->
+  <ItemGroup Condition="'$(DesignTimeBuild)' != 'true'">
+    <Content Remove="wwwroot\service-worker.js" />
+    <Content Update="wwwroot\service-worker.published.js" Link="wwwroot\service-worker.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\API.Shared\IdentityServer4.OpenAdmin.API.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

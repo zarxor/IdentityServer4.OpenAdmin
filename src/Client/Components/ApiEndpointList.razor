@@ -1,0 +1,27 @@
+﻿@inherits ComponentBase
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@using Newtonsoft.Json
+@using TypeSupport.Extensions
+@typeparam TContractModel
+
+@if (contracts == null)
+{
+    <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" Style="margin-bottom: 20px" />
+}
+else
+{
+    <RadzenDataList WrapItems="true" AllowPaging="true" Data="@contracts" TItem="TContractModel">
+        <Template Context="contract">
+            <RadzenCard Style="width:300px;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>@ContractHeader(contract)</h5>
+                        <a href="@PagePath/@ContractId(contract)">More</a>
+                    </div>
+                </div>
+
+            </RadzenCard>
+        </Template>
+    </RadzenDataList>
+}

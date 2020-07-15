@@ -34,6 +34,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer4.OpenAdmin.U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer4.OpenAdmin.EntityFramework", "src\EntityFramework\IdentityServer4.OpenAdmin.EntityFramework.csproj", "{FD0401D2-D8BF-4146-8B38-A3CC7978642D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer4.OpenAdmin.API.Shared", "src\API.Shared\IdentityServer4.OpenAdmin.API.Shared.csproj", "{FB47B6F0-B335-44A4-9343-FB593C82F0CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer4.OpenAdmin.BlazorClient", "src\Client\IdentityServer4.OpenAdmin.BlazorClient.csproj", "{2B92A40A-8A8F-452F-BC0B-761778A76391}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +72,14 @@ Global
 		{FD0401D2-D8BF-4146-8B38-A3CC7978642D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD0401D2-D8BF-4146-8B38-A3CC7978642D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD0401D2-D8BF-4146-8B38-A3CC7978642D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB47B6F0-B335-44A4-9343-FB593C82F0CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB47B6F0-B335-44A4-9343-FB593C82F0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB47B6F0-B335-44A4-9343-FB593C82F0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB47B6F0-B335-44A4-9343-FB593C82F0CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B92A40A-8A8F-452F-BC0B-761778A76391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B92A40A-8A8F-452F-BC0B-761778A76391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B92A40A-8A8F-452F-BC0B-761778A76391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B92A40A-8A8F-452F-BC0B-761778A76391}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +92,8 @@ Global
 		{E76C168F-E8F2-4453-BFB6-42EB6FB56ADC} = {1BDDBC19-3B6C-4715-A6A3-CB1EAD9E489F}
 		{DFD56BAE-BD77-42B0-B63D-01CEC5D7A813} = {1BDDBC19-3B6C-4715-A6A3-CB1EAD9E489F}
 		{FD0401D2-D8BF-4146-8B38-A3CC7978642D} = {1BDDBC19-3B6C-4715-A6A3-CB1EAD9E489F}
+		{FB47B6F0-B335-44A4-9343-FB593C82F0CC} = {1BDDBC19-3B6C-4715-A6A3-CB1EAD9E489F}
+		{2B92A40A-8A8F-452F-BC0B-761778A76391} = {1BDDBC19-3B6C-4715-A6A3-CB1EAD9E489F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3291D15A-0023-4012-8743-A54524903AD5}
