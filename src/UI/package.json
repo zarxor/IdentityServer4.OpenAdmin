@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "chartist": "^0.11.0",
     "es6-promise": "^4.2.4",
     "fast-json-patch": "^2.0.7",
